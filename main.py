@@ -46,6 +46,8 @@ EW_interrupt = Pin(7, Pin.IN)
 NS_interrupt.irq(trigger=Pin.IRQ_RISING, handler=car_detected_NS)
 EW_interrupt.irq(trigger=Pin.IRQ_RISING, handler=car_detected_EW)
 
+SINGLE_GREEN_TIME = 3
+
 
 def count_cars():
     while True:
@@ -62,12 +64,12 @@ def count_cars():
         if north_detect or south_detect:
             NS_digital.value(1)
             waiting_cars["NS"] += 1
-            print(f"NS detected car. {waiting_cars["NS"]} waiting.")
+            print(f"\tNS detected car. {waiting_cars["NS"]} waiting.")
         
         if east_detect:
             EW_digital.value(1)
             waiting_cars["EW"] += 1
-            print(f"EW detected car. {waiting_cars["EW"]} waiting.")
+            print(f"\tEW detected car. {waiting_cars["EW"]} waiting.")
             
 _thread.start_new_thread(count_cars, ())
     
@@ -84,20 +86,20 @@ try:
         
         if waiting_cars["NS"]:
             cars_allowed = waiting_cars["NS"]
-            print(f"letting {cars_allowed} cars through NS lights")
+            print(f"\nletting {cars_allowed} cars through NS lights. -> green for {SINGLE_GREEN_TIME * cars_allowed} seconds.\n")
             waiting_cars["NS"] = 0
             utime.sleep(1)
             lc.TurnGreen(RED_NS, YLW_NS, GRN_NS)
-            utime.sleep(3 * cars_allowed)
+            utime.sleep(SINGLE_GREEN_TIME * cars_allowed)
             lc.TurnRed(RED_NS, YLW_NS, GRN_NS)
         
         if waiting_cars["EW"]:
             cars_allowed = waiting_cars["EW"]
-            print(f"letting {cars_allowed} cars through EW lights")
+            print(f"\nletting {cars_allowed} cars through EW lights -> green for {SINGLE_GREEN_TIME * cars_allowed} seconds.\n")
             waiting_cars["EW"] = 0
             utime.sleep(1)
             lc.TurnGreen(RED_EW, YLW_EW, GRN_EW)
-            utime.sleep(3 * cars_allowed)
+            utime.sleep(SINGLE_GREEN_TIME * cars_allowed)
             lc.TurnRed(RED_EW, YLW_EW, GRN_EW)
         
         utime.sleep(3)
