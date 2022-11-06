@@ -5,6 +5,7 @@ from machine import Pin
 import LightController as lc
 from getDetect import getDetect
 import prexcp as p
+import lcd
 
 RED_NS = 21
 YLW_NS = 20
@@ -34,8 +35,8 @@ def car_detected_EW(Pin):
     car_detected_EW = True
     
     
-NS_digital = Pin(0, Pin.OUT)
-EW_digital = Pin(1, Pin.OUT)
+# NS_digital = Pin(0, Pin.OUT)
+# EW_digital = Pin(1, Pin.OUT)
 
 # NS_digital.value(0)
 # EW_digital.value(0)
@@ -62,12 +63,12 @@ def count_cars():
         # print(north_detect, south_detect, east_detect)
         
         if north_detect or south_detect:
-            NS_digital.value(1)
+            # NS_digital.value(1)
             waiting_cars["NS"] += 1
             print(f"\tNS detected car. {waiting_cars["NS"]} waiting.")
         
         if east_detect:
-            EW_digital.value(1)
+            # EW_digital.value(1)
             waiting_cars["EW"] += 1
             print(f"\tEW detected car. {waiting_cars["EW"]} waiting.")
             
@@ -106,3 +107,4 @@ try:
 except Exception as e:
     Pin(25, Pin.OUT).value(1)
     p.print_exc(e)
+
