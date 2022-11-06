@@ -62,12 +62,12 @@ def count_cars():
         if north_detect or south_detect:
             NS_digital.value(1)
             waiting_cars["NS"] += 1
-            print("NS", waiting_cars["NS"])
+            print(f"NS detected car. {waiting_cars["NS"]} waiting.")
         
         if east_detect:
             EW_digital.value(1)
             waiting_cars["EW"] += 1
-            print("EW", waiting_cars["EW"])
+            print(f"EW detected car. {waiting_cars["EW"]} waiting.")
             
 _thread.start_new_thread(count_cars, ())
     
@@ -80,10 +80,11 @@ try:
          #   EW_digital.value(0)
           #  car_detected_EW = False
         
-        print(waiting_cars)
+        #print(waiting_cars)
         
         if waiting_cars["NS"]:
             cars_allowed = waiting_cars["NS"]
+            print(f"letting {cars_allowed} cars through NS lights")
             waiting_cars["NS"] = 0
             utime.sleep(1)
             lc.TurnGreen(RED_NS, YLW_NS, GRN_NS)
@@ -92,6 +93,7 @@ try:
         
         if waiting_cars["EW"]:
             cars_allowed = waiting_cars["EW"]
+            print(f"letting {cars_allowed} cars through EW lights")
             waiting_cars["EW"] = 0
             utime.sleep(1)
             lc.TurnGreen(RED_EW, YLW_EW, GRN_EW)
