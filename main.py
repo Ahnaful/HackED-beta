@@ -65,13 +65,15 @@ def count_cars():
         if north_detect or south_detect:
             # NS_digital.value(1)
             waiting_cars["NS"] += 1
-            print(f"\tNS detected car. {waiting_cars["NS"]} waiting.")
-            lcd.lcdprint(0,0,f"\tNS detected car. {waiting_cars["NS"]} waiting.")
+            print(f"NS detected car. {waiting_cars["NS"]} waiting.")
+            lcd.lcdprint(0,0,f"NS detected car. {waiting_cars["NS"]} waiting.")
+            lcd.lcdprint(0,0,"")
         if east_detect:
             # EW_digital.value(1)
             waiting_cars["EW"] += 1
-            print(f"\tEW detected car. {waiting_cars["EW"]} waiting.")
-            lcd.lcdprint(0,0,f"\tEW detected car. {waiting_cars["EW"]} waiting.")
+            print(f"EW detected car. {waiting_cars["EW"]} waiting.")
+            lcd.lcdprint(0,0,f"EW detected car. {waiting_cars["EW"]} waiting.")
+            lcd.lcdprint(0,0,"")
 _thread.start_new_thread(count_cars, ())
     
 try:
@@ -87,8 +89,9 @@ try:
         
         if waiting_cars["NS"]:
             cars_allowed = waiting_cars["NS"]
-            print(f"\nletting {cars_allowed} cars through NS lights. -> green for {SINGLE_GREEN_TIME * cars_allowed} seconds.\n")
-            lcd.lcdprint(0,0,f"\nletting {cars_allowed} cars through NS lights. -> green for {SINGLE_GREEN_TIME * cars_allowed} seconds.\n")
+            print(f"\nletting {cars_allowed} cars thru NS lights. -> grn for {SINGLE_GREEN_TIME * cars_allowed} sec.\n")
+            lcd.lcdprint(0,0,f"\nletting {cars_allowed} cars thru NS lights. -> grn for {SINGLE_GREEN_TIME * cars_allowed} sec.\n")
+            lcd.lcdprint(0,0,"")
             waiting_cars["NS"] = 0
             utime.sleep(1)
             lc.TurnGreen(RED_NS, YLW_NS, GRN_NS)
@@ -97,8 +100,9 @@ try:
         
         if waiting_cars["EW"]:
             cars_allowed = waiting_cars["EW"]
-            print(f"\nletting {cars_allowed} cars through EW lights -> green for {SINGLE_GREEN_TIME * cars_allowed} seconds.\n")
-            lcd.lcdprint(0,0,f"\nletting {cars_allowed} cars through EW lights -> green for {SINGLE_GREEN_TIME * cars_allowed} seconds.\n") 
+            print(f"\nletting {cars_allowed} cars thru EW lights -> grn for {SINGLE_GREEN_TIME * cars_allowed} sec.\n")
+            lcd.lcdprint(0,0,f"\nletting {cars_allowed} cars thru EW lights -> grn for {SINGLE_GREEN_TIME * cars_allowed} sec.\n")
+            lcd.lcdprint(0,0,"")
             waiting_cars["EW"] = 0
             utime.sleep(1)
             lc.TurnGreen(RED_EW, YLW_EW, GRN_EW)
