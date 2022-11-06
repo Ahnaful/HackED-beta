@@ -89,8 +89,8 @@ try:
         
         if waiting_cars["NS"]:
             cars_allowed = waiting_cars["NS"]
-            print(f"\nGreen for {SINGLE_GREEN_TIME * cars_allowed} sec.\n")
-            lcd.lcdprint(0,0,f"\nGreen for {SINGLE_GREEN_TIME * cars_allowed} sec.\n")
+            print(f"NS cars passing \nGreen for {SINGLE_GREEN_TIME * cars_allowed} sec.\n")
+            lcd.lcdprint(0,0,f"NS cars passing\nGreen for {SINGLE_GREEN_TIME * cars_allowed} sec.\n")
             
             waiting_cars["NS"] = 0
             utime.sleep(1)
@@ -100,8 +100,8 @@ try:
         
         if waiting_cars["EW"]:
             cars_allowed = waiting_cars["EW"]
-            print(f"\nGreen for {SINGLE_GREEN_TIME * cars_allowed} sec.\n")
-            lcd.lcdprint(0,0,f"\nGreen for {SINGLE_GREEN_TIME * cars_allowed} sec.\n")
+            print(f"EW cars passing\nGreen for {SINGLE_GREEN_TIME * cars_allowed} sec.\n")
+            lcd.lcdprint(0,0,f"EW cars passing\nGreen for {SINGLE_GREEN_TIME * cars_allowed} sec.\n")
            
             waiting_cars["EW"] = 0
             utime.sleep(1)
