@@ -1,15 +1,17 @@
 from machine import Pin
 import time
 
-def RedtoGreen(r, g):
+def TurnGreen(r, y, g):
 
     redPin = Pin(r, Pin.OUT)
+    yellowPin = Pin(y, Pin.OUT)
     greenPin = Pin(g, Pin.OUT)
 
     redPin.value(0)
+    yellowPin.value(0)
     greenPin.value(1)
 
-def GreentoRed(r,y,g):
+def TurnRed(r,y,g):
 
     redPin = Pin(r, Pin.OUT)
     yellowPin = Pin(y, Pin.OUT)
@@ -26,3 +28,4 @@ def AllOff(r, y, g):
     Pin(r, Pin.OUT).value(0)
     Pin(y, Pin.OUT).value(0)
     Pin(g, Pin.OUT).value(0)
+    
