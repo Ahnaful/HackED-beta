@@ -66,12 +66,12 @@ def count_cars():
             # NS_digital.value(1)
             waiting_cars["NS"] += 1
             print(f"\tNS detected car. {waiting_cars["NS"]} waiting.")
-        
+            lcdprint(0,0,f"\tNS detected car. {waiting_cars["NS"]} waiting.")
         if east_detect:
             # EW_digital.value(1)
             waiting_cars["EW"] += 1
             print(f"\tEW detected car. {waiting_cars["EW"]} waiting.")
-            
+            lcdprint(0,0,f"\tEW detected car. {waiting_cars["EW"]} waiting.")
 _thread.start_new_thread(count_cars, ())
     
 try:
@@ -88,6 +88,7 @@ try:
         if waiting_cars["NS"]:
             cars_allowed = waiting_cars["NS"]
             print(f"\nletting {cars_allowed} cars through NS lights. -> green for {SINGLE_GREEN_TIME * cars_allowed} seconds.\n")
+            lcdprint(0,0,f"\nletting {cars_allowed} cars through NS lights. -> green for {SINGLE_GREEN_TIME * cars_allowed} seconds.\n")
             waiting_cars["NS"] = 0
             utime.sleep(1)
             lc.TurnGreen(RED_NS, YLW_NS, GRN_NS)
@@ -97,6 +98,7 @@ try:
         if waiting_cars["EW"]:
             cars_allowed = waiting_cars["EW"]
             print(f"\nletting {cars_allowed} cars through EW lights -> green for {SINGLE_GREEN_TIME * cars_allowed} seconds.\n")
+            lcdprint(0,0,f"\nletting {cars_allowed} cars through EW lights -> green for {SINGLE_GREEN_TIME * cars_allowed} seconds.\n") 
             waiting_cars["EW"] = 0
             utime.sleep(1)
             lc.TurnGreen(RED_EW, YLW_EW, GRN_EW)
@@ -107,4 +109,5 @@ try:
 except Exception as e:
     Pin(25, Pin.OUT).value(1)
     p.print_exc(e)
+
 
