@@ -10,7 +10,7 @@ def getDetect(pwm_pin, adc_pin):
     
 
     pwm.duty_u16(adc.read_u16())
-    time.sleep(0.5)
+    time.sleep_ms(100)
         
     if pwm.duty_u16() < 600:
         return False, pwm.duty_u16()
@@ -26,3 +26,4 @@ if __name__ == "__main__":
         print()
         
         time.sleep(2)
+

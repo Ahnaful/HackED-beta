@@ -40,11 +40,11 @@ EW_digital = Pin(1, Pin.OUT)
 # NS_digital.value(0)
 # EW_digital.value(0)
 
-NS_interrupt = Pin(6, Pin.IN)
-EW_interrupt = Pin(7, Pin.IN)
+# NS_interrupt = Pin(6, Pin.IN)
+# EW_interrupt = Pin(7, Pin.IN)
 
-NS_interrupt.irq(trigger=Pin.IRQ_RISING, handler=car_detected_NS)
-EW_interrupt.irq(trigger=Pin.IRQ_RISING, handler=car_detected_EW)
+# NS_interrupt.irq(trigger=Pin.IRQ_RISING, handler=car_detected_NS)
+# EW_interrupt.irq(trigger=Pin.IRQ_RISING, handler=car_detected_EW)
 
 SINGLE_GREEN_TIME = 3
 
