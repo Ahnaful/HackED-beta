@@ -22,8 +22,7 @@ def GreentoRed(r,y,g):
     redPin.value(1)
     
 
-while True:
-    RedtoGreen(21, 19)
-    time.sleep(3)
-    GreentoRed(21,20,19)
-    time.sleep(3)
+def AllOff(r, y, g):
+    Pin(r, Pin.OUT).value(0)
+    Pin(y, Pin.OUT).value(0)
+    Pin(g, Pin.OUT).value(0)
