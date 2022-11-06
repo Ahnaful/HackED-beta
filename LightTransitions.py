@@ -19,7 +19,7 @@ def TurnRed(r,y,g):
 
     greenPin.value(0)
     yellowPin.value(1)
-    time.sleep(3)
+    time.sleep(1.5)
     yellowPin.value(0)
     redPin.value(1)
     
