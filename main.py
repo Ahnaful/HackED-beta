@@ -90,24 +90,28 @@ try:
         if waiting_cars["NS"]:
             cars_allowed = waiting_cars["NS"]
             print(f"NS cars passing \nGreen for {SINGLE_GREEN_TIME * cars_allowed} sec.\n")
-            lcd.lcdprint(0,0,f"NS cars passing\nGreen for {SINGLE_GREEN_TIME * cars_allowed} sec.\n")
+            lcd.lcdprint(0,0,f"NS cars pass.\nGreen for {SINGLE_GREEN_TIME * cars_allowed} sec.\n")
             
             waiting_cars["NS"] = 0
             utime.sleep(1)
             lc.TurnGreen(RED_NS, YLW_NS, GRN_NS)
             utime.sleep(SINGLE_GREEN_TIME * cars_allowed)
             lc.TurnRed(RED_NS, YLW_NS, GRN_NS)
+            
+            lcd.lcdprint(0,0, "")
         
         if waiting_cars["EW"]:
             cars_allowed = waiting_cars["EW"]
             print(f"EW cars passing\nGreen for {SINGLE_GREEN_TIME * cars_allowed} sec.\n")
-            lcd.lcdprint(0,0,f"EW cars passing\nGreen for {SINGLE_GREEN_TIME * cars_allowed} sec.\n")
+            lcd.lcdprint(0,0,f"EW cars pass.\nGreen for {SINGLE_GREEN_TIME * cars_allowed} sec.\n")
            
             waiting_cars["EW"] = 0
             utime.sleep(1)
             lc.TurnGreen(RED_EW, YLW_EW, GRN_EW)
             utime.sleep(SINGLE_GREEN_TIME * cars_allowed)
             lc.TurnRed(RED_EW, YLW_EW, GRN_EW)
+            
+            lcd.lcdprint(0,0, "")
         
         utime.sleep(3)
 except Exception as e:
