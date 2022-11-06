@@ -37,8 +37,8 @@ def car_detected_EW(Pin):
 NS_digital = Pin(0, Pin.OUT)
 EW_digital = Pin(1, Pin.OUT)
 
-NS_digital.value(0)
-EW_digital.value(0)
+# NS_digital.value(0)
+# EW_digital.value(0)
 
 NS_interrupt = Pin(6, Pin.IN)
 EW_interrupt = Pin(7, Pin.IN)
@@ -53,46 +53,52 @@ def count_cars():
         global EW_digital
         global waiting_cars
         
-        north_detect = getDetect(15, 28)
-        south_detect = getDetect(15, 27)
-        east_detect  = getDetect(15, 26)
+        north_detect, d = getDetect(15, 28)
+        south_detect, d = getDetect(15, 27)
+        east_detect, d  = getDetect(15, 26)
         
         # print(north_detect, south_detect, east_detect)
         
         if north_detect or south_detect:
             NS_digital.value(1)
+            waiting_cars["NS"] += 1
+            print("NS", waiting_cars["NS"])
         
         if east_detect:
             EW_digital.value(1)
+            waiting_cars["EW"] += 1
+            print("EW", waiting_cars["EW"])
             
 _thread.start_new_thread(count_cars, ())
     
 try:
     while True:  # main loop
-        if car_detected_NS:
-            print("NS")
-            NS_digital.value(0)
-            car_detected_NS = False
-        if car_detected_EW:
-            print("EW")
-            EW_digital.value(0)
-            car_detected_EW = False
+        #if car_detected_NS:
+         #   NS_digital.value(0)
+          #  car_detected_NS = False
+        #if car_detected_EW:
+         #   EW_digital.value(0)
+          #  car_detected_EW = False
+        
+        print(waiting_cars)
         
         if waiting_cars["NS"]:
+            cars_allowed = waiting_cars["NS"]
+            waiting_cars["NS"] = 0
             utime.sleep(1)
             lc.TurnGreen(RED_NS, YLW_NS, GRN_NS)
-            utime.sleep(3 * waiting_cars["NS"])
-            waiting_cars["NS"] = 0
+            utime.sleep(3 * cars_allowed)
             lc.TurnRed(RED_NS, YLW_NS, GRN_NS)
         
         if waiting_cars["EW"]:
+            cars_allowed = waiting_cars["EW"]
+            waiting_cars["EW"] = 0
             utime.sleep(1)
             lc.TurnGreen(RED_EW, YLW_EW, GRN_EW)
-            utime.sleep(3 * waiting_cars["EW"])
-            waiting_cars["EW"] = 0
+            utime.sleep(3 * cars_allowed)
             lc.TurnRed(RED_EW, YLW_EW, GRN_EW)
         
-        utime.sleep(0.1)
+        utime.sleep(3)
 except Exception as e:
     Pin(25, Pin.OUT).value(1)
     p.print_exc(e)
